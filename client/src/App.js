@@ -5,12 +5,15 @@ import { CssBaseline, Grid } from '@material-ui/core';
 import Header from './compoments/Header/Header';
 import List from './compoments/List/List';
 import Map from './compoments/Map/Map';
-
-import { getCountryReport } from './api';
+import Cards from './compoments/Cards/Cards'
+import Charts from './compoments/Charts/Charts'
+import CountryPicker from './compoments/CountryPicker/CountryPicker'
+import { getCountryReport, getGobalStatus } from './api';
 
 const App = () => {
   const [childClicked, setchildClicked] = useState(null)
   const [countries, setCountries] = useState([]);
+  const [gobalStatus, setGobalStatus] = useState([]);
   const [country, setCountry] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -20,6 +23,10 @@ const App = () => {
       .then(({ data }) => {
         setCountries(data)
         setIsLoading(false)
+      })
+    getGobalStatus()
+      .then(({ data }) => {
+        setGobalStatus(data)
       })
   }, []);
 
@@ -40,6 +47,12 @@ const App = () => {
             setchildClicked={setchildClicked}
           />
         </Grid>
+      </Grid>
+
+      <Grid container spacing={3} style={{ width: '100%', height: '100vh', alignItems: 'center', flexDirection: 'column', marginTop: '200px' }}>
+        <Cards data={gobalStatus} />
+        <CountryPicker />
+        <Charts data={countries} />
       </Grid>
     </>
   );
