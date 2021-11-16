@@ -1,10 +1,9 @@
-import React from "react"
-import { Autocomplete } from '@react-google-maps/api';
-import { AppBar, Toolbar, Typography, InputBase, Box } from '@material-ui/core'
+import React, { useState } from "react"
+import { AppBar, Toolbar, Typography, InputBase, Box, Button } from '@material-ui/core'
 
 import useStyles from './styles';
 
-const Header = () => {
+const Header = ({ setCountry }) => {
     const classes = useStyles();
     return (
         <AppBar position="static">
@@ -16,11 +15,6 @@ const Header = () => {
                     <Typography variant='h6' className={classes.title}>
                         Monitor Covid-19 impact
                     </Typography>
-                    {/* <Autocomplete> */}
-                    <div className={classes.search}>
-                        <InputBase placeholder="Search country" classes={{ root: classes.inputRoot, input: classes.inputInput }} />
-                    </div>
-                    {/* </Autocomplete> */}
                 </Box>
             </Toolbar>
         </AppBar>
